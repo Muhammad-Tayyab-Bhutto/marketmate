@@ -1,0 +1,15 @@
+# Extension Icons Required
+
+The following icon files are required but missing:
+- icon-16.png (16x16 pixels)
+- icon-32.png (32x32 pixels)  
+- icon-48.png (48x48 pixels)
+- icon-128.png (128x128 pixels)
+
+These are referenced in extension/manifest.json.
+
+For development, you can:
+1. Create placeholder images with any image editor
+2. Use a single icon and resize it to all required sizes
+3. Or temporarily comment out icon references in manifest.json
+

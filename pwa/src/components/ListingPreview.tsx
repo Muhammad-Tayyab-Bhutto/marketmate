@@ -1,14 +1,20 @@
-import React, { useState } from 'react';
-import { ListingContent, ToneVariant, VideoScript } from '../lib/chromeBuiltInAi';
+import { useState } from "react";
+import {
+  ListingContent,
+  ToneVariant,
+  VideoScript,
+} from "../lib/chromeBuiltInAi";
 
 interface ListingPreviewProps {
   content: ListingContent;
   variants?: ToneVariant[];
   videoScript?: VideoScript;
-  selectedTone?: 'original' | 'friendly' | 'premium' | 'bargain';
-  selectedLanguage?: 'en' | 'ur';
-  onToneChange?: (tone: 'original' | 'friendly' | 'premium' | 'bargain') => void;
-  onLanguageChange?: (lang: 'en' stricter 'ur') => void;
+  selectedTone?: "original" | "friendly" | "premium" | "bargain";
+  selectedLanguage?: "en" | "ur";
+  onToneChange?: (
+    tone: "original" | "friendly" | "premium" | "bargain"
+  ) => void;
+  onLanguageChange?: (lang: "en" | "ur") => void;
   onCopy?: () => void;
   onExport?: () => void;
 }
@@ -17,45 +23,55 @@ export function ListingPreview({
   content,
   variants = [],
   videoScript,
-  selectedTone = 'original',
-  selectedLanguage = 'en',
+  selectedTone = "original",
+  selectedLanguage = "en",
   onToneChange,
   onLanguageChange,
   onCopy,
-  onExport
+  onExport,
 }: ListingPreviewProps) {
   const [copied, setCopied] = useState(false);
-  const [translatedContent, setTranslatedContent] = useState<string | null>(null);
 
-  const currentContent = selectedTone === 'original' 
-    ? content
-    : variants.find(v => v.tone === selectedTone) || content;
+  const variant =
+    selectedTone !== "original"
+      ? variants.find((v) => v.tone === selectedTone)
+      : null;
+
+  const displayTitle = variant?.title || content.title;
+  const displayDescription = variant?.description || content.description;
+  // Always use original content for keywords and price
+  const displayKeywords = content.keywords;
+  const displayPrice = content.suggestedPrice;
 
   const handleCopy = async () => {
-    const textToCopy = `${currentContent.title}\n\n${currentContent.description}\n\nKeywords: ${currentContent.keywords.join(', ')}`;
+    const textToCopy = `${displayTitle}\n\n${displayDescription}\n\nKeywords: ${displayKeywords.join(
+      ", "
+    )}`;
     try {
       await navigator.clipboard.writeText(textToCopy);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
       onCopy?.();
     } catch (error) {
-      console.error('Failed to copy:', error);
+      console.error("Failed to copy:", error);
     }
   };
 
   const handleExport = () => {
     const exportData = {
-      title: currentContent.title,
-      description: currentContent.description,
-      keywords: currentContent.keywords,
-      price: currentContent.suggestedPrice,
+      title: displayTitle,
+      description: displayDescription,
+      keywords: displayKeywords,
+      price: displayPrice,
       tone: selectedTone,
       language: selectedLanguage,
-      videoScript
+      videoScript,
     };
-    const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
+    const blob = new Blob([JSON.stringify(exportData, null, 2)], {
+      type: "application/json",
+    });
     const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
+    const a = document.createElement("a");
     a.href = url;
     a.download = `marketplace-listing-${Date.now()}.json`;
     a.click();
@@ -66,11 +82,14 @@ export function ListingPreview({
   const handleFacebookMarketplace = () => {
     // Facebook Marketplace URL with prefilled parameters (if supported)
     const params = new URLSearchParams({
-      title: currentContent.title,
-      description: currentContent.description,
-      price: currentContent.suggestedPrice?.toString() || ''
+      title: displayTitle,
+      description: displayDescription,
+      price: displayPrice?.toString() || "",
     });
-    window.open(`https://www.facebook.com/marketplace/create/item?${params.toString()}`, '_blank');
+    window.open(
+      `https://www.facebook.com/marketplace/create/item?${params.toString()}`,
+      "_blank"
+    );
   };
 
   return (
@@ -106,7 +125,7 @@ export function ListingPreview({
             onClick={handleCopy}
             className="px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded-lg transition-colors text-sm"
           >
-            {copied ? '✓ Copied' : 'Copy'}
+            {copied ? "✓ Copied" : "Copy"}
           </button>
           <button
             onClick={handleExport}
@@ -128,23 +147,23 @@ export function ListingPreview({
         <div className="space-y-4">
           <div>
             <h2 className="text-2xl font-bold text-gray-900 mb-2">
-              {translatedContent || currentContent.title}
+              {displayTitle}
             </h2>
-            {currentContent.suggestedPrice && (
+            {displayPrice && (
               <p className="text-3xl font-bold text-primary-600">
-                ${currentContent.suggestedPrice}
+                ${displayPrice}
               </p>
             )}
           </div>
 
           <div className="prose max-w-none">
             <p className="text-gray-700 whitespace-pre-line">
-              {currentContent.description}
+              {displayDescription}
             </p>
           </div>
 
           <div className="flex flex-wrap gap-2">
-            {currentContent.keywords.map((keyword, index) => (
+            {displayKeywords.map((keyword: string, index: number) => (
               <span
                 key={index}
                 className="px-2 py-1 bg-gray-100 text-gray-700 rounded text-sm"
@@ -159,8 +178,12 @@ export function ListingPreview({
       {/* Video Script */}
       {videoScript && (
         <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
-          <h3 className="text-lg font-semibold mb-4">Video Script ({videoScript.duration}s)</h3>
-          <p className="text-gray-700 whitespace-pre-line mb-4">{videoScript.script}</p>
+          <h3 className="text-lg font-semibold mb-4">
+            Video Script ({videoScript.duration}s)
+          </h3>
+          <p className="text-gray-700 whitespace-pre-line mb-4">
+            {videoScript.script}
+          </p>
           {videoScript.keyPoints.length > 0 && (
             <div>
               <h4 className="font-medium mb-2">Key Points:</h4>
@@ -176,4 +199,3 @@ export function ListingPreview({
     </div>
   );
 }
-

@@ -76,7 +76,7 @@ export interface VideoScript {
  *   });
  */
 export async function generateFactsFromImageAndVoice(
-  images: ImageData[],
+  _images: ImageData[],
   voiceData?: VoiceData
 ): Promise<ProductFacts> {
   // TODO: Replace with chrome.ai.prompt() call

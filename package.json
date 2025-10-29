@@ -1,0 +1,35 @@
+{
+  "name": "marketmate",
+  "version": "1.0.0",
+  "description": "Privacy-first marketplace listing generator using Chrome Built-in AI",
+  "type": "module",
+  "scripts": {
+    "dev": "cd pwa && npm run dev",
+    "build": "cd pwa && npm run build",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.11",
+    "@types/node": "^20.10.6",
+    "fake-indexeddb": "^5.0.2",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "ts-jest": "^29.1.1",
+    "typescript": "^5.3.3"
+  },
+  "keywords": [
+    "marketplace",
+    "chrome-extension",
+    "pwa",
+    "chrome-built-in-ai",
+    "privacy-first",
+    "offline-capable"
+  ],
+  "author": "",
+  "license": "MIT",
+  "workspaces": [
+    "pwa"
+  ]
+}

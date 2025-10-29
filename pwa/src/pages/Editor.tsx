@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { ImageUploader } from "../components/ImageUploader";
 import { VoiceRecorder } from "../components/VoiceRecorder";
 import { ListingPreview } from "../components/ListingPreview";
@@ -18,11 +18,8 @@ import {
   translateText,
   summarizeVoiceNote,
 } from "../lib/chromeBuiltInAi";
-import {
-  saveListing,
-  generateListingId,
-  ImageData as ImageDataType,
-} from "../lib/indexeddb";
+import { saveListing, generateListingId } from "../lib/indexeddb";
+import type { ImageData as ImageDataType } from "../lib/chromeBuiltInAi";
 import { suggestPrice } from "../utils/promptBuilders";
 
 export function Editor() {
@@ -30,7 +27,7 @@ export function Editor() {
   const [voiceNote, setVoiceNote] = useState<VoiceData | undefined>();
   const [isGenerating, setIsGenerating] = useState(false);
   const [progress, setProgress] = useState<string>("");
-  const [facts, setFacts] = useState<ProductFacts | null>(null);
+  const [_facts, setFacts] = useState<ProductFacts | null>(null);
   const [content, setContent] = useState<ListingContent | null>(null);
   const [variants, setVariants] = useState<ToneVariant[]>([]);
   const [videoScript, setVideoScript] = useState<VideoScript | null>(null);

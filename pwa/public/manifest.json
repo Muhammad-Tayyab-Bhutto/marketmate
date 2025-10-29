@@ -1,0 +1,22 @@
+{
+  "name": "MarketMate",
+  "short_name": "MarketMate",
+  "description": "Privacy-first marketplace listing generator",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#3b82f6",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-<｜place▁holder▁no▁26｜>.png",
+      "sizes": "<｜place▁holder▁no▁26｜>x<｜place▁holder▁no▁26｜>",
+      "type": "image/png"
+    }
+  ]
+}

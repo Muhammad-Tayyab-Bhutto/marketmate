@@ -8,6 +8,9 @@
 import { openDB, DBSchema, IDBPDatabase } from "idb";
 import { ImageData, VoiceData, ListingContent } from "./chromeBuiltInAi";
 
+// Re-export types for convenience
+export type { ImageData, VoiceData, ListingContent };
+
 export interface StoredListing {
   id: string;
   createdAt: number;
