@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MarketMate</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        width: 400px;
+        min-height: 500px;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+          sans-serif;
+        background: #f9fafb;
+      }
+      .header {
+        background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+        color: white;
+        padding: 1rem;
+        text-align: center;
+      }
+      .header h1 {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+      }
+      .privacy-badge {
+        background: rgba(255, 255, 255, 0.2);
+        padding: 0.25rem 0.75rem;
+        border-radius: 9999px;
+        font-size: 0.75rem;
+        display: inline-block;
+      }
+      .content {
+        padding: 1rem;
+      }
+      .button {
+        width: 100%;
+        padding: 0.75rem;
+        background: #3b82f6;
+        color: white;
+        border: none;
+        border-radius: 0.5rem;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        margin-bottom: 0.5rem;
+        transition: background 0.2s;
+      }
+      .button:hover {
+        background: #2563eb;
+      }
+      .button:disabled {
+        background: #9ca3af;
+        cursor: not-allowed;
+      }
+      .button-secondary {
+        background: #6b7280;
+      }
+      .button-secondary:hover {
+        background: #4b5563;
+      }
+      .info {
+        background: white;
+        border: 1px solid #e5e7eb;
+        border-radius: 0.5rem;
+        padding: 1rem;
+        margin-bottom: 1rem;
+      }
+      .info p {
+        color: #6b7280;
+        font-size: 0.875rem;
+        margin-bottom: 0.5rem;
+      }
+      .info p:last-child {
+        margin-bottom: 0;
+      }
+      .link {
+        color: #3b82f6;
+        text-decoration: none;
+      }
+      .link:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1>MarketMate</h1>
+      <span class="privacy-badge">🔒 Processed Locally</span>
+    </div>
+    <div class="content">
+      <div class="info">
+        <p><strong>Quick Start:</strong></p>
+        <p>1. Click "Open MarketMate PWA" to use the full app</p>
+        <p>2. Upload product images</p>
+        <p>3. Add an optional voice note</p>
+        <p>4. Generate your listing!</p>
+      </div>
+      <button id="openPWA" class="button">Open MarketMate PWA</button>
+      <button id="openEditor" class="button button-secondary">
+        Open in New Tab
+      </button>
+    </div>
+    <script src="popup.js"></script>
+  </body>
+</html>
